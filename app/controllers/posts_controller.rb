@@ -10,13 +10,14 @@ class PostsController < ApplicationController
   def create
     @post = Post.create(post_params)
 
-    @post.save
-
-    redirect_to @post
+    if @post.save
+      redirect_to @post, notice: 'Your post was created successfully'
+    else
+      render :new
+    end
   end
 
-  def show
-  end
+  def show; end
 
   private
 

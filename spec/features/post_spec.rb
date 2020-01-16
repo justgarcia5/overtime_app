@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 require 'capybara/rails'
 
@@ -15,12 +16,15 @@ describe 'navigate' do
   end
 
   feature 'creation' do
-    scenario "has a new form that can be reached" do
+    before do
+      visit new_post_path
+    end
+
+    scenario 'has a new form that can be reached' do
       visit new_post_path
       expect(page.status_code).to eq(200)
     end
     scenario 'can be created from new form page' do
-      visit new_post_path
       # byebug
       expect(page).to have_content('New Post')
       # fill_in 'date', with: Date.today
