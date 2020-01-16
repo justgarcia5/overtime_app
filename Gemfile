@@ -17,6 +17,8 @@ gem 'bootsnap', '>= 1.4.2', require: false
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'sqlite3', '~> 1.4'
+  gem 'rubocop', '~> 0.79.0'
+  gem 'dotenv-rails'
 end
 
 group :development do
@@ -24,14 +26,15 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console', '>= 3.3.0'
+  gem 'launchy', '~> 2.4', '>= 2.4.3'
 end
 
 group :test do
   gem 'capybara', '>= 2.15'
-  gem 'database_cleaner', '~> 1.7'
-  gem 'rspec-rails', '~> 3.9'
-  gem 'rubocop', '~> 0.79.0'
+  gem 'factory_bot_rails', '~> 4.8.2'
+  gem 'chromedriver-helper'
   gem 'selenium-webdriver'
+  gem 'rspec-rails', '~> 3.9'
   gem 'webdrivers'
 end
 
