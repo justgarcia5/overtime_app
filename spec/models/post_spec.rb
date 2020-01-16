@@ -1,19 +1,20 @@
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
-  describe 'Creation' do
-    before do
-      @post = Post.create(date: Date.today, rationale: 'Anything')
+  let(:user) { build(:user) }
+  describe 'Post' do
+    let(:post) { build(:post, user: user) }
+    context 'when all attributes supplied' do
+      it 'post' do
+        expect(post).to be_valid
+      end
     end
 
-    it 'can be created' do
-      expect(@post).to  be_valid
-    end
-
-    it 'cannot be created without a date and rationale' do
-      @post.date = nil
-      @post.rationale = nil
-      expect(@post).to_not be_valid
+    context 'when attributes are missing' do
+      let(:post) { build(:post, date: nil, rationale: nil, user: user) }
+      it 'cannot be created without date, rationale' do
+        expect(post).to_not be_valid
+      end
     end
   end
 end
