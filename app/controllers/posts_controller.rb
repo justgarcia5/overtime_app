@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :find_post, only: %i[show]
+  before_action :set_post, only: %i[show update edit]
 
   def index
     @posts = Post.all
@@ -20,6 +20,17 @@ class PostsController < ApplicationController
     end
   end
 
+  def edit; end
+
+  def update
+    if @post.update(post_params)
+      redirect_to posts_path
+      flash[:notice] = 'Location has been successfully updated'
+    else
+      render :edit
+    end
+  end
+
   def show; end
 
   private
@@ -28,7 +39,7 @@ class PostsController < ApplicationController
     params.require(:post).permit(:date, :rationale)
   end
 
-  def find_post
+  def set_post
     @post = Post.find(params[:id])
   end
 end

@@ -9,8 +9,8 @@ feature 'index' do
   let(:user) { create_logged_in_user }
 
   before do
-    @post2 = user.posts.create!(date: Date.today, rationale: 'Post2')
-    @post = user.posts.create!(date: Date.today, rationale: 'Post1')
+    @post2 = Post.create!(date: Date.today, rationale: 'Post2', user_id: user.id)
+    @post = Post.create!(date: Date.today, rationale: 'Post1', user_id: user.id)
     visit posts_path(user)
   end
 
@@ -36,13 +36,25 @@ feature 'creation' do
     expect(page.status_code).to eq(200)
   end
   scenario 'can be created from new form page' do
-    # byebug
     expect(page).to have_content('New Post')
-    # fill_in 'date', with: Date.today
-    # fill_in 'rationale', with: 'Some rationale'
-
-    # click_on 'Submit'
-    # expect(page).to have_content('Some rationale')
+    fill_in 'post_date', with: Date.today
+    fill_in 'post_rationale', with: 'Some rationale'
+    click_on 'Submit'
+    expect(page).to have_content('Some rationale')
   end
+end
 
+feature 'edit' do
+  let(:user) { create_logged_in_user }
+
+  before do
+    @post = Post.create!(date: Date.today, rationale: 'Post1', user_id: user.id)
+    visit edit_post_path(@post, user)
+  end
+  scenario 'user can edit posts' do
+    fill_in 'post_date', with: Date.today
+    fill_in 'post_rationale', with: 'Some rationale'
+    click_on 'Submit'
+    expect(page).to have_content('Some rationale')
+  end
 end
