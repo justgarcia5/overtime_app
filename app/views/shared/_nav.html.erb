@@ -1,5 +1,5 @@
 <div class="logo">
-  <h1>Time Tracker</h1>
+  <h1 class="mt-3">Time Tracker</h1>
 </div>
 
 <ul class="custom-nav nav nav-tabs">
@@ -8,6 +8,9 @@
   </li>
   <li class="nav-item">
     <%= link_to "Time Entries", posts_path, class: "nav-link #{active?(posts_path)}" %>
+  </li>
+  <li class="nav-item">
+    <%= link_to "New Entry", new_post_path, class: "nav-link #{active?(new_post_path)}" %>
   </li>
 
   <li class="nav-item dropdown ml-md-auto">

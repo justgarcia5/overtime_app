@@ -27,6 +27,7 @@ end
 
 feature 'creation' do
   let(:user) { create_logged_in_user }
+
   before do
     visit new_post_path(user)
   end
