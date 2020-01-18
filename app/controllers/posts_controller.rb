@@ -1,7 +1,9 @@
 class PostsController < ApplicationController
   before_action :find_post, only: %i[show]
 
-  def index; end
+  def index
+    @posts = Post.all
+  end
 
   def new
     @post = Post.new

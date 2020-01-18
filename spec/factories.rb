@@ -3,7 +3,12 @@
 FactoryBot.define do
   factory :post do
     date Date.today
-    rationale 'Rationale'
+    rationale 'Post1'
+  end
+
+  factory :post2 do
+    date Date.today
+    rationale 'Post2'
   end
 
   factory :user do
