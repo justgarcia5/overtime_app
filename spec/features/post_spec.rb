@@ -9,8 +9,8 @@ feature 'index' do
   let(:user) { create_logged_in_user }
 
   before do
-    @post2 = user.posts.create!(date: Date.today, rationale: "Post2")
-    @post = user.posts.create!(date: Date.today, rationale: "Post1")
+    @post2 = user.posts.create!(date: Date.today, rationale: 'Post2')
+    @post = user.posts.create!(date: Date.today, rationale: 'Post1')
     visit posts_path(user)
   end
 
