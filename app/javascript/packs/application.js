@@ -16,6 +16,7 @@ require("channels")
 // const imagePath = (name) => images(name, true)
 
 import 'bootstrap'
+import './stylesheets/application'
 
 document.addEventListener("turbolinks:load", () => {
   console.log("webpack is working")

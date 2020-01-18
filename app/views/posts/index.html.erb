@@ -1,1 +1,23 @@
 <h1>Posts</h1>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>
+        #
+      </th>
+      <th>
+        date
+      </th>
+      <th>
+        User
+      </th>
+      <th>
+        Rationale
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render 'posts', collection: @posts %>
+  </tbody>
+</table>

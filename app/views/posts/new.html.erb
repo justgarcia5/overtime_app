@@ -1,10 +1,11 @@
 <h1>New Post</h1>
+
 <%= form_for @post do |f| %>
 
-  <%= f.label :date, class: 'form-label' %><br>
+  <%= f.label :date %><br>
   <%= f.date_field :date %><br>
 
-  <%= f.label :rationale, class: 'form-label' %><br>
+  <%= f.label :rationale %><br>
   <%= f.text_area :rationale %><br>
 
   <%= f.submit "Submit" %>

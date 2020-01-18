@@ -1,7 +1,9 @@
 class PostsController < ApplicationController
   before_action :find_post, only: %i[show]
 
-  def index; end
+  def index
+    @posts = Post.all
+  end
 
   def new
     @post = Post.new
@@ -9,6 +11,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.create(post_params)
+    @post.user_id = current_user.id
 
     if @post.save
       redirect_to @post, notice: 'Your post was created successfully'
