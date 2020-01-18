@@ -5,6 +5,7 @@ include RequestHelpers
 
 RSpec.describe User, type: :model do
   let(:user) { build(:user) }
+
   describe 'creation' do
     it 'can be created' do
       expect(user).to be_valid
@@ -18,7 +19,7 @@ RSpec.describe User, type: :model do
   end
   describe 'custom name methods' do
     it 'has a full name method that combines the first and last name' do
-      expect(user.full_name).to eq("SNOW, JON")
+      expect(user.full_name).to eq('SNOW, JON')
     end
   end
 end

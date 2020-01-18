@@ -17,4 +17,11 @@ FactoryBot.define do
     email 'email@test.com'
     password '123456'
   end
+
+  factory :admin_user, class: 'AdminUser' do
+    first_name 'Admin'
+    last_name 'User'
+    email 'admin@test.com'
+    password '123456'
+  end
 end
