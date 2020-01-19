@@ -37,8 +37,8 @@ feature 'creation' do
   end
   scenario 'can be created from new form page' do
     expect(page).to have_content('New Post')
-    fill_in 'post_date', with: Date.today
-    fill_in 'post_rationale', with: 'Some rationale'
+    fill_in 'date', with: Date.today
+    fill_in 'rationale', with: 'Some rationale'
     click_on 'Submit'
     expect(page).to have_content('Some rationale')
   end
@@ -52,8 +52,8 @@ feature 'edit' do
     visit edit_post_path(@post, user)
   end
   scenario 'user can edit posts' do
-    fill_in 'post_date', with: Date.today
-    fill_in 'post_rationale', with: 'Some rationale'
+    fill_in 'date', with: Date.today
+    fill_in 'rationale', with: 'Some rationale'
     click_on 'Submit'
     expect(page).to have_content('Some rationale')
   end
