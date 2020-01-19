@@ -42,6 +42,11 @@ feature 'creation' do
     click_on 'Submit'
     expect(page).to have_content('Some rationale')
   end
+  scenario 'link to new post page on navtab' do
+    visit root_path
+    click_on 'new-entry'
+    expect(page).to have_content('New Post')
+  end
 end
 
 feature 'edit' do
@@ -65,14 +70,15 @@ feature 'edit' do
     expect(page).to have_content('Edited post')
   end
 end
-# feature 'delete' do
-#   let(:user) { create_logged_in_user }
+feature 'delete' do
+  let(:user) { create_logged_in_user }
 
-#   before do
-#     @post = Post.create!(date: Date.today, rationale: 'Post1', user_id: user.id)
-#   end
-#   scenario 'user can delete posts' do
-
-#     expect(@post.id).to eq(nil)
-#   end
-# end
+  before do
+    @post = Post.create!(date: Date.today, rationale: 'Post1', user_id: user.id)
+  end
+  scenario 'it can be deleted' do
+    visit posts_path
+    expect { click_link '', class: 'no-link' }.to change(Post, :count).by(-1)
+    # expect(page).to have_content('Your post was deleted successfully')
+  end
+end
