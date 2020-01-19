@@ -49,12 +49,30 @@ feature 'edit' do
 
   before do
     @post = Post.create!(date: Date.today, rationale: 'Post1', user_id: user.id)
-    visit edit_post_path(@post, user)
+    visit posts_path(user)
   end
-  scenario 'user can edit posts' do
-    fill_in 'date', with: Date.today
-    fill_in 'rationale', with: 'Some rationale'
-    click_on 'Submit'
-    expect(page).to have_content('Some rationale')
+  scenario 'user can click edit button and on index page' do
+    click_link 'Edit'
+    visit edit_post_path(@post, user)
+    expect(page).to have_content('Edit Post')
+    expect(page).to have_content('Post1')
+  end
+  scenario 'it can be edited' do
+    visit edit_post_path(@post, user)
+    fill_in 'date', with: Date.yesterday
+    fill_in 'rationale', with: 'Edited post'
+    click_button 'Submit'
+    expect(page).to have_content('Edited post')
   end
 end
+# feature 'delete' do
+#   let(:user) { create_logged_in_user }
+
+#   before do
+#     @post = Post.create!(date: Date.today, rationale: 'Post1', user_id: user.id)
+#   end
+#   scenario 'user can delete posts' do
+
+#     expect(@post.id).to eq(nil)
+#   end
+# end

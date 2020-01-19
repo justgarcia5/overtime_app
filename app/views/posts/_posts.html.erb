@@ -12,5 +12,8 @@
     <td>
       <%= truncate(post.rationale) %>
     </td>
+    <td>
+      <%= link_to 'Edit', edit_post_path(post.id), id: 'edit', class: 'btn-sm btn-secondary text-decoration-none' %>
+    </td>
   </tr>
 <% end %>
