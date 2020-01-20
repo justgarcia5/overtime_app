@@ -2,36 +2,30 @@
 
 require 'spec_helper'
 require 'rails_helper'
-require 'capybara/rspec'
 include RequestHelpers
 
 feature 'index' do
   let(:user) { create_logged_in_user }
-
   before do
-    @post2 = Post.create!(date: Date.today, rationale: 'Post2', user_id: user.id)
-    @post = Post.create!(date: Date.today, rationale: 'Post1', user_id: user.id)
+    @post2 = Post.create!(date: Date.today, rationale: 'Post2', user: user)
+    @post = Post.create!(date: Date.today, rationale: 'Post1', user: user)
     visit posts_path(user)
   end
-
   scenario 'can be reached successfully' do
     expect(page.status_code).to eq(200)
   end
   scenario 'has a title Posts' do
     expect(page).to have_content('Posts')
   end
-  scenario 'has a of list Posts' do
+  scenario 'has a list of Posts' do
     expect(page).to have_content(/Post2 | Post1/)
   end
 end
-
 feature 'creation' do
   let(:user) { create_logged_in_user }
-
   before do
     visit new_post_path(user)
   end
-
   scenario 'has a new form that can be reached' do
     expect(page.status_code).to eq(200)
   end
@@ -48,12 +42,10 @@ feature 'creation' do
     expect(page).to have_content('New Post')
   end
 end
-
 feature 'edit' do
   let(:user) { create_logged_in_user }
-
   before do
-    @post = Post.create!(date: Date.today, rationale: 'Post1', user_id: user.id)
+    @post = Post.create!(date: Date.today, rationale: 'Post1', user: user)
     visit posts_path(user)
   end
   scenario 'user can click edit button and on index page' do
@@ -72,9 +64,8 @@ feature 'edit' do
 end
 feature 'delete' do
   let(:user) { create_logged_in_user }
-
   before do
-    @post = Post.create!(date: Date.today, rationale: 'Post1', user_id: user.id)
+    @post = Post.create!(date: Date.today, rationale: 'Post1', user: user)
   end
   scenario 'it can be deleted' do
     visit posts_path
