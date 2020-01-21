@@ -30,7 +30,12 @@ class PostsController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+  rescue ActiveRecord::RecordNotFound => e
+    render json: {
+      error: e.to_s
+    }, status: :not_found
+  end
 
   def destroy
     return unless @post.destroy
