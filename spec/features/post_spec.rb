@@ -41,6 +41,13 @@ feature 'creation' do
     click_on 'new-entry'
     expect(page).to have_content('New Post')
   end
+  scenario 'can see flash message on create' do
+    expect(page).to have_content('New Post')
+    fill_in 'date', with: Date.today
+    fill_in 'rationale', with: 'Some rationale'
+    click_on 'Submit'
+    expect(page).to have_content('Your post was created successfully')
+  end
 end
 feature 'edit' do
   let(:user) { create_logged_in_user }
@@ -61,6 +68,14 @@ feature 'edit' do
     click_button 'Submit'
     expect(page).to have_content('Edited post')
   end
+  scenario 'can see flash message on updated post' do
+    visit edit_post_path(@post, user)
+    expect(page).to have_content('Edit Post')
+    fill_in 'date', with: Date.today
+    fill_in 'rationale', with: 'Some rationale'
+    click_on 'Submit'
+    expect(page).to have_content('Your post was updated successfully')
+  end
 end
 feature 'delete' do
   let(:user) { create_logged_in_user }
@@ -70,6 +85,11 @@ feature 'delete' do
   scenario 'it can be deleted' do
     visit posts_path
     expect { click_link '', class: 'no-link' }.to change(Post, :count).by(-1)
-    # expect(page).to have_content('Your post was deleted successfully')
+  end
+  scenario 'can see flash message on post delete' do
+    visit posts_path(@post, user)
+    expect(page).to have_content('Posts')
+    expect { click_link '', class: 'no-link' }.to change(Post, :count).by(-1)
+    expect(page).to have_content('Your post was deleted successfully')
   end
 end
