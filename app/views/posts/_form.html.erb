@@ -1,5 +1,7 @@
 <%= form_for @post, class: "form-horizontal" do |f| %>
 
+  <%= render 'shared/errors', obj: @post %>
+
   <div class="custom-form form-group">
 
     <%= f.label :date %><br>
