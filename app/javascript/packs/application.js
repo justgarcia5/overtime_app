@@ -19,6 +19,12 @@ require("channels")
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
+$(function() {
+  setTimeout(function() {
+    $('.alert').fadeOut('slow');
+  }, 5000);
+})
+
 document.addEventListener("turbolinks:load", () => {
   console.log("webpack is working")
   $('[data-toggle="tooltip"]').tooltip()
