@@ -17,7 +17,6 @@ feature 'admin dashbooard' do
   scenario 'can be reached by an admin user' do
     login(admin)
     visit admin_root_path
-    byebug
     expect(current_path).to eq(admin_root_path)
   end
 end

@@ -6,7 +6,7 @@
 # you're free to overwrite the RESTful controller actions.
 module Admin
   def self.admin_types
-    ["AdminUser"]
+    ['AdminUser']
   end
 
   class ApplicationController < Administrate::ApplicationController
@@ -14,10 +14,10 @@ module Admin
     before_action :authenticate_admin
 
     def authenticate_admin
-      unless Admin.admin_types.include?(current_user.try(:type))
-        flash[:alert] = 'You are not authorized to access this page'
-        redirect_to(root_path)
-      end
+      return unless Admin.admin_types.include?(current_user.try(:type))
+
+      flash[:alert] = 'You are not authorized to access this page'
+      redirect_to(root_path)
     end
 
     # Override this value to specify the number of elements to display at a time
