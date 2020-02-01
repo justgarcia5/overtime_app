@@ -11,4 +11,10 @@ module RequestHelpers
   def login(user)
     login_as user, scope: :user
   end
+
+  def create_logged_in_admin
+    admin = FactoryBot.create(:admin)
+    login(admin)
+    admin
+  end
 end
