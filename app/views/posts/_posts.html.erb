@@ -17,7 +17,7 @@
     </td>
     <td>
       <%= link_to post_path(post), method: :delete, data: { confirm: "Are you sure you would like to delete #{post.user.full_name}" }, :class => "no-link"  do %>
-        <%= image_tag "icon-delete.svg" %>
+        <%= image_tag asset_pack_path('media/images/icon-delete.svg') %>
       <% end %>
     </td>
   </tr>
