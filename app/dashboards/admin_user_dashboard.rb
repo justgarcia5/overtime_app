@@ -1,4 +1,4 @@
-require "administrate/base_dashboard"
+require 'administrate/base_dashboard'
 
 class AdminUserDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
@@ -15,36 +15,36 @@ class AdminUserDashboard < Administrate::BaseDashboard
     last_name: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
-    type: Field::String,
+    type: Field::String
   }.freeze
 
-  COLLECTION_ATTRIBUTES = [
-    :posts,
-    :id,
-    :email,
+  COLLECTION_ATTRIBUTES = %i[
+    posts
+    id
+    email
   ].freeze
 
-  SHOW_PAGE_ATTRIBUTES = [
-    :posts,
-    :id,
-    :email,
-    :sign_in_count,
-    :current_sign_in_at,
-    :last_sign_in_at,
-    :current_sign_in_ip,
-    :last_sign_in_ip,
-    :first_name,
-    :last_name,
-    :created_at,
-    :updated_at,
-    :type,
+  SHOW_PAGE_ATTRIBUTES = %i[
+    posts
+    id
+    email
+    sign_in_count
+    current_sign_in_at
+    last_sign_in_at
+    current_sign_in_ip
+    last_sign_in_ip
+    first_name
+    last_name
+    created_at
+    updated_at
+    type
   ].freeze
 
-  FORM_ATTRIBUTES = [
-    :email,
-    :password,
-    :first_name,
-    :last_name,
-    :type,
+  FORM_ATTRIBUTES = %i[
+    email
+    password
+    first_name
+    last_name
+    type
   ].freeze
 end
