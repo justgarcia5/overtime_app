@@ -2,13 +2,29 @@
 
   <%= render 'shared/errors', obj: @post %>
 
-  <div class="custom-form form-group">
+  <div class="custom-form">
 
-    <%= f.label :date %><br>
-    <%= f.date_field :date, class: 'date-field form-control', id: 'date' %><br>
+    <div class="form-group">
+      <%= f.label :date %>
+      <%= f.date_field :date, class: 'date-field form-control', id: 'date' %>
+    </div>
 
-    <%= f.label :rationale %><br>
-    <%= f.text_area :rationale, class: 'form-control', id: 'rationale' %><br>
+    <div class="form-group">
+      <%= f.label :rationale %>
+      <%= f.text_area :rationale, class: 'form-control', id: 'rationale' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.radio_button :status, 'submitted' %>
+      <%= f.label :status, 'Submitted' %>
+
+      <%= f.radio_button :status, 'approved' %>
+      <%= f.label :status, 'Approved' %>
+
+      <%= f.radio_button :status, 'rejected' %>
+      <%= f.label :status, 'Rejected' %>
+    </div>
+
 
     <%= f.submit "Submit", class: 'btn btn-primary' %>
 
