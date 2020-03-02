@@ -24,4 +24,11 @@ FactoryBot.define do
     email 'admin@test.com'
     password '123456'
   end
+
+  factory :non_authorized_user, class: 'User' do
+    first_name 'Non'
+    last_name 'Authorized'
+    email 'nonauth@test.com'
+    password '123456'
+  end
 end

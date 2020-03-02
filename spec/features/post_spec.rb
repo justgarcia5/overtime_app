@@ -21,6 +21,7 @@ feature 'index' do
     expect(page).to have_content(/Post2 | Post1/)
   end
 end
+
 feature 'creation' do
   let(:user) { create_logged_in_user }
   before do
@@ -49,6 +50,7 @@ feature 'creation' do
     expect(page).to have_content('Your post was created successfully')
   end
 end
+
 feature 'edit' do
   let(:user) { create_logged_in_user }
   before do
@@ -76,7 +78,15 @@ feature 'edit' do
     click_on 'Submit'
     expect(page).to have_content('Your post was updated successfully')
   end
+  scenario 'it cannot be edited by non authorized user' do
+    logout(user)
+    non_auth_user = FactoryBot.create(:non_authorized_user)
+    login(non_auth_user)
+    visit edit_post_path(@post)
+    expect(current_path).to eq(root_path)
+  end
 end
+
 feature 'delete' do
   let(:user) { create_logged_in_user }
   before do
