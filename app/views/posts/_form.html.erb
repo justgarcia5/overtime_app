@@ -2,16 +2,21 @@
 
   <%= render 'shared/errors', obj: @post %>
 
-  <div class="custom-form form-group">
+  <div class="custom-form">
 
-    <%= f.label :date %><br>
-    <%= f.date_field :date, class: 'date-field form-control', id: 'date' %><br>
+    <div class="form-group">
+      <%= f.label :date %>
+      <%= f.date_field :date, class: 'date-field form-control', id: 'date' %>
+    </div>
 
-    <%= f.label :rationale %><br>
-    <%= f.text_area :rationale, class: 'form-control', id: 'rationale' %><br>
+    <div class="form-group">
+      <%= f.label :rationale %>
+      <%= f.text_area :rationale, class: 'form-control', id: 'rationale' %>
+    </div>
+
+    <%= render partial: 'status', locals: { f: f } if current_user.type == 'AdminUser' %>
 
     <%= f.submit "Submit", class: 'btn btn-primary' %>
 
   </div>
-
 <% end %>
