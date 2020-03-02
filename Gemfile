@@ -46,3 +46,4 @@ end
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'devise', '~> 4.7', '>= 4.7.1'
 gem 'administrate', '~> 0.12.0'
+gem 'pundit', '~> 1.1'
