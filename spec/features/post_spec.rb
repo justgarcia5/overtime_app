@@ -6,9 +6,10 @@ include RequestHelpers
 
 feature 'index' do
   let(:user) { create_logged_in_user }
+  let(:admin) { create_logged_in_admin }
   before do
+    @post = Post.create!(date: Date.today, rationale: 'Post1', user: admin)
     @post2 = Post.create!(date: Date.today, rationale: 'Post2', user: user)
-    @post = Post.create!(date: Date.today, rationale: 'Post1', user: user)
     visit posts_path(user)
   end
   scenario 'can be reached successfully' do
@@ -20,7 +21,12 @@ feature 'index' do
   scenario 'has a list of Posts' do
     expect(page).to have_content(/Post2 | Post1/)
   end
+  scenario 'has a scope so that only post creators can see their posts' do
+    visit posts_path(user)
+    expect(page).to_not have_content(/Post1/)
+  end
 end
+
 feature 'creation' do
   let(:user) { create_logged_in_user }
   before do
@@ -49,6 +55,7 @@ feature 'creation' do
     expect(page).to have_content('Your post was created successfully')
   end
 end
+
 feature 'edit' do
   let(:user) { create_logged_in_user }
   before do
@@ -76,7 +83,15 @@ feature 'edit' do
     click_on 'Submit'
     expect(page).to have_content('Your post was updated successfully')
   end
+  scenario 'cannot be made by non authorized user' do
+    logout(user)
+    non_auth_user = FactoryBot.create(:non_authorized_user)
+    login(non_auth_user)
+    visit edit_post_path(@post)
+    expect(current_path).to eq(root_path)
+  end
 end
+
 feature 'delete' do
   let(:user) { create_logged_in_user }
   before do
