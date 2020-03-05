@@ -2,7 +2,11 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[show update edit destroy]
 
   def index
-    @posts = Post.all
+    if current_user.try(:type) == 'AdminUser'
+      @posts = Post.all
+    else
+      @posts = current_user.posts.all
+    end
   end
 
   def new
@@ -20,9 +24,13 @@ class PostsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    authorize @post
+  end
 
   def update
+    authorize @post
+
     if @post.update(post_params)
       redirect_to post_path, notice: 'Your post was updated successfully'
     else
