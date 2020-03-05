@@ -27,6 +27,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console', '>= 3.3.0'
   gem 'launchy', '~> 2.4', '>= 2.4.3'
+  gem 'rails-erd'
 end
 
 group :test do
